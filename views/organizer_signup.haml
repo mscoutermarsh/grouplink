@@ -1,0 +1,189 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+      %title GroupLink
+      %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+        %meta{:content => "", :name => "description"}
+          %meta{:content => "", :name => "author"}
+            %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
+            %script{:type => "text/javascript", :src  => "http://www.parsecdn.com/js/parse-1.1.8.min.js"}
+            %script{:type => "text/javascript", :src  => "http://cdnjs.cloudflare.com/ajax/libs/knockout/2.1.0/knockout-min.js"}
+
+            %link{:href => "./assets/css/bootstrap.css", :rel => "stylesheet"}
+              :css
+                body {
+                  padding-top: 20px;
+                  padding-bottom: 40px;
+                }
+
+                /* Custom container */
+                .container-narrow {
+                  margin: 0 auto;
+                  max-width: 700px;
+                }
+                .container-narrow > hr {
+                  margin: 30px 0;
+                }
+
+                /* Main marketing message and sign up button */
+                .jumbotron {
+                  margin: 60px 0;
+                  text-align: center;
+                }
+                .jumbotron h1 {
+                  font-size: 72px;
+                  line-height: 1;
+                }
+                .jumbotron .btn {
+                  font-size: 21px;
+                  padding: 14px 24px;
+                }
+
+                /* Supporting marketing content */
+                .marketing {
+                  margin: 60px 0;
+                }
+                .marketing p + h4 {
+                  margin-top: 28px;
+                }
+                  %link{:href => "./assets/css/bootstrap-responsive.css", :rel => "stylesheet"}
+                %link{:href => "./assets/ico/favicon.ico", :rel => "shortcut icon"}
+                  %link{:href => "./assets/ico/apple-touch-icon-144-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}
+                    %link{:href => "./assets/ico/apple-touch-icon-114-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}
+                      %link{:href => "./assets/ico/apple-touch-icon-72-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}
+                        %link{:href => "./assets/ico/apple-touch-icon-57-precomposed.png", :rel => "apple-touch-icon-precomposed"}
+  %body
+    .container-narrow
+      .masthead
+        %ul.nav.nav-pills.pull-right
+          %li.active
+            %a{:href => "#"} Home
+          %li
+            %a{:href => "#"} Login
+          %li
+            %a{:href => "#"} Signup
+        %h3.muted GroupLink
+        / %a.btn.btn-large.btn-success{:href => "#"} For Event Attendees
+        / %a.btn.btn-large.btn-warning{:href => "#"} For Event Organizers
+
+        %well
+          %form.bs-docs-example.form-horizontal
+            .control-group
+              %label.control-label{:for => "inputEmail"} Name of Event
+              .controls
+                %input#inputEmail{:placeholder => "title", :type => "text"}
+            .control-group
+              %label.control-label{:for => "inputPassword"} Type of event
+              .controls
+                %label.radio
+                  %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
+                    Type 1
+                %label.radio
+                  %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+                    Type2
+                %label.radio
+                  %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+                    Type3
+                %label.radio
+                  %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+                    Type4
+            .control-group
+              %label.control-label{:for => "inputEmail"} Expected Number of Attendees
+              .controls
+                %select
+                  %option 0 - 50
+                  %option 50 - 200
+                  %option 200 - 400
+                  %option 400 - 1,000
+                  %option 1,000 - 5,000
+                  %option 5,000 - 10,000
+                  %option 10,000+
+            .control-group
+              %label.control-label{:for => "inputEmail"} What features do you want enabled?
+              .controls
+                %label.checkbox
+                  %input{:type => "checkbox"}
+                    Contact Manager
+                  %input{:type => "checkbox"}
+                    Mass Messaging
+                  %input{:type => "checkbox"}
+                    Analytics
+            .control-group
+              %label.control-label{:for => "firstname"} First Name
+              .controls
+                %input#inputEmail{:placeholder => "firstname", "data-bind"=>"value: firstName", :type => "text"}
+              %label.control-label{:for => "lastname"} Last Name
+              .controls
+                %input#inputEmail{:placeholder => "lastname", "data-bind"=>"value: lastName", :type => "text"}
+              %label.control-label{:for => "lastname"} Email
+              .controls
+                %input#inputEmail{:placeholder => "email", "data-bind"=>"value: email", :type => "text"}
+              %label.control-label{:for => "password"} password
+              .controls
+                %input#inputEmail{:placeholder => "password", "data-bind"=>"value: password", :type => "password"}
+                %br
+                %button.btn{:id=>"getStarted"} Get Started!
+          %hr
+          #footer
+            .container
+              %p © GroupLink 2012
+              %p.muted.credit        
+              %ul{:class=>"nav nav-list"}
+                %li
+                  %a{:href => "http://twitter.com/whatever"} Whatever
+                %li
+                  %a{:href => "http://twitter.com/whatever"} Facebook
+                %li{:class=>"divider"}
+                %li
+                  %a{:href => "http://twitter.com/whatever"} Twitter
+                
+
+    %script{:src =>"./assets/js/jquery.js"}
+    %script{:src =>"./assets/js/bootstrap-transition.js"}
+    %script{:src =>"./assets/js/bootstrap-alert.js"}
+    %script{:src =>"./assets/js/bootstrap-modal.js"}
+    %script{:src =>"./assets/js/bootstrap-dropdown.js"}
+    %script{:src =>"./assets/js/bootstrap-scrollspy.js"}
+    %script{:src =>"./assets/js/bootstrap-tab.js"}
+    %script{:src =>"./assets/js/bootstrap-tooltip.js"}
+    %script{:src =>"./assets/js/bootstrap-popover.js"}
+    %script{:src =>"./assets/js/bootstrap-button.js"}
+    %script{:src =>"./assets/js/bootstrap-collapse.js"}
+    %script{:src =>"./assets/js/bootstrap-carousel.js"}
+    %script{:src =>"./assets/js/bootstrap-typeahead.js"}
+    :javascript
+        $(document).ready(function(){
+          Parse.initialize("ldy6BcBCk7Bs5QabwyL02MRcoqruYkaZQNlbs2EA", "qUp2x4fWl2VOIl6UzchOKtreceynQKGM7wyjCHVN");
+
+          var model = function() {
+            this.firstName = ko.observable("Mike");
+            this.lastName = ko.observable("Coutermarsh");
+            this.email = ko.observable("coutermarsh.mike@gmail.com");
+            this.password = ko.observable("password");
+          }
+
+          var UserModel = new model();
+          ko.applyBindings(UserModel);
+
+           
+         $("#getStarted").click(function(event){
+            var user = new Parse.User();
+            
+
+            user.set("firstName", "blah blah");
+            user.set("lastName", "blah blah");
+            user.set("password", "blah blah");
+            user.set("email", "whatever@whatever.com");
+            user.set("username", "blah blah");
+            
+            user.signUp(null, {
+              success: function(user) {
+                alert("good!");
+              },
+              error: function(user, error) {
+                alert("Error: " + error.code + " " + error.message);
+              }
+            });
+          });
+        });

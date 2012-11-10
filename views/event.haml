@@ -8,6 +8,8 @@
           %meta{:content => "", :name => "author"}
             %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
             %script{:type => "text/javascript", :src  => "http://www.parsecdn.com/js/parse-1.1.8.min.js"}
+            %script{:type => "text/javascript", :src  => "http://cdnjs.cloudflare.com/ajax/libs/knockout/2.1.0/knockout-min.js"}
+
             %link{:href => "./assets/css/bootstrap.css", :rel => "stylesheet"}
               :css
                 body {
@@ -62,31 +64,28 @@
           %li
             %a{:href => "#"} Signup
         %h3.muted GroupLink
-      %hr
-        .jumbotron
-          %h1 Super awesome marketing!
-          %p.lead Welcome to the best tool for event organizers and attendees to manage, exchange and analyze contacts!
-          %a.btn.btn-large.btn-success{:href => "#"} For Event Attendees
-          %a.btn.btn-large.btn-warning{:href => "#"} For Event Organizers
-        %hr
-          .row-fluid.marketing
-            .span4
-              %h4 What this is
-              %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-            .span4
-              %h4 Why it works
-              %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-            .span4
-              %h4 Plans and pricing
-              %p Maecenas sed diam eget risus varius blandit sit amet non magna.
+        / %a.btn.btn-large.btn-success{:href => "#"} For Event Attendees
+        / %a.btn.btn-large.btn-warning{:href => "#"} For Event Organizers
+
+        %well
+          %table.table
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Email
+                %th Phone
+            %tbody{"data-bind"=>"foreach: attendees"}
+              %tr
+                %td{"data-bind"=>"text: firstName"}
+                %td{"data-bind"=>"text: lastName"}
+                %td{"data-bind"=>"text: email"}
+                %td{"data-bind"=>"text: phone"}
+              %tr
           %hr
           #footer
             .container
               %p © GroupLink 2012
-              %p.muted.credit        
-                %a{:href => "http://twitter.com/whatever"} Twitter |
-                %a{:href => "http://twitter.com/whatever"} Facebook
-                %a{:href => "http://twitter.com/whatever"} Whatever
                 
 
     %script{:src =>"./assets/js/jquery.js"}
@@ -103,16 +102,48 @@
     %script{:src =>"./assets/js/bootstrap-carousel.js"}
     %script{:src =>"./assets/js/bootstrap-typeahead.js"}
     :javascript
-        Parse.initialize("ldy6BcBCk7Bs5QabwyL02MRcoqruYkaZQNlbs2EA", "qUp2x4fWl2VOIl6UzchOKtreceynQKGM7wyjCHVN");
+        $(document).ready(function(){
+          Parse.initialize("ldy6BcBCk7Bs5QabwyL02MRcoqruYkaZQNlbs2EA", "qUp2x4fWl2VOIl6UzchOKtreceynQKGM7wyjCHVN");
 
-        
-        var TestObject = Parse.Object.extend("TestObject");
-        var testObject = new TestObject();
-          testObject.save({foo: "test"}, {
-          success: function(object) {
-            $(".success").show();
-          },
-          error: function(model, error) {
-            $(".error").show();
+          setInterval(updateAttendees, 10000);
+
+          function updateAttendees() {
+            var Allattendees = Parse.Object.extend("UserCard");
+            var query = new Parse.Query(Allattendees);
+            query.find({
+              success: function(results) {
+                event.attendees.removeAll();
+                $.each(results, function(index) {
+                  var data = results[index].attributes
+                  new Attendee(data.firstName,data.lastName,data.email,data.phone);
+                  event.attendees.push(new Attendee(data.firstName,data.lastName,data.email,data.phone));
+                });
+              },
+              error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+              }
+            });
           }
+
+          // Class to represent a row in the seat reservations grid
+          function Attendee(firstName, lastName, email, phone) {
+              var self = this;
+              self.firstName = firstName;
+              self.lastName = lastName;
+              self.email = email;
+              self.phone = phone;
+          }
+
+          // Overall viewmodel for this screen, along with initial state
+          function TheEvent() {
+              var self = this;
+
+              // Editable data
+              self.attendees = ko.observableArray([
+              ]);
+          }
+
+          var event = new TheEvent();
+
+          ko.applyBindings(event);
         });
