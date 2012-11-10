@@ -3,11 +3,13 @@
   %head
     %title GroupLink
     %link{ :href => "./css/bootstrap.css", :media => "screen", :rel => "stylesheet" }
+    %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
+    %script{:type => "text/javascript", :src  => "http://www.parsecdn.com/js/parse-1.1.8.min.js"}
   %body
     .topbar
       .fill
         .container
-          %a{:class => "brand", :href => ""}Project name
+          %a{:class => "brand", :href => ""}GroupLink
           %ul(class="nav")
             %li(class="active")
               %a(href = "/") Home
@@ -31,3 +33,17 @@
       %footer
         %p
           &copy; Company 2011
+      :javascript
+        Parse.initialize("ldy6BcBCk7Bs5QabwyL02MRcoqruYkaZQNlbs2EA", "qUp2x4fWl2VOIl6UzchOKtreceynQKGM7wyjCHVN");
+
+        
+        var TestObject = Parse.Object.extend("TestObject");
+        var testObject = new TestObject();
+          testObject.save({foo: "test"}, {
+          success: function(object) {
+            $(".success").show();
+          },
+          error: function(model, error) {
+            $(".error").show();
+          }
+        });
