@@ -1,5 +1,6 @@
 require 'sinatra'
+require 'haml'
 
-get '/' do
-  "Grouplink. Startup new haven!"
+get '/' do 
+  haml :main
 end
