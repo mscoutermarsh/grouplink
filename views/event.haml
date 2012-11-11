@@ -9,6 +9,8 @@
             %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
             %script{:type => "text/javascript", :src  => "http://www.parsecdn.com/js/parse-1.1.8.min.js"}
             %script{:type => "text/javascript", :src  => "http://cdnjs.cloudflare.com/ajax/libs/knockout/2.1.0/knockout-min.js"}
+            %script{:type => "text/javascript", :src  => "http://code.highcharts.com/highcharts.js"}
+            %script{:type => "text/javascript", :src  => "http://code.highcharts.com/modules/exporting.js"}
 
             %link{:href => "./assets/css/bootstrap.css", :rel => "stylesheet"}
               :css
@@ -63,7 +65,8 @@
             %a{:href => "#"} Login
           %li
             %a{:href => "#"} Signup
-        %h3.muted GroupLink
+        %h3.muted 
+          %img{:src => "/logo_small.png"} 
         / %a.btn.btn-large.btn-success{:href => "#"} For Event Attendees
         / %a.btn.btn-large.btn-warning{:href => "#"} For Event Organizers
 
@@ -126,7 +129,7 @@
             });
           }
 
-          // Class to represent a row in the seat reservations grid
+          // Class to represent an attendee
           function Attendee(firstName, lastName, email, phone) {
               var self = this;
               self.firstName = firstName;
@@ -139,9 +142,7 @@
           function TheEvent() {
               var self = this;
 
-              // Editable data
-              self.attendees = ko.observableArray([
-              ]);
+              self.attendees = ko.observableArray([]);
           }
 
           var event = new TheEvent();
